@@ -1,0 +1,16 @@
+:root {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(160deg, rgba(52, 61, 75, 1), rgba(45, 52, 68, 1), rgba(38, 45, 60, 1));
+
+  /* Expose Sass variables as CSS variables for Tailwind and runtime use */
+  --color-primary: #{$primary-color};
+  --color-secondary: #{$secondary-color};
+}
