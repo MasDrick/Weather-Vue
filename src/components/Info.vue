@@ -34,7 +34,7 @@ const dayInfoData: DayInfoData[] = [
     <div class="dataWeather">
       <DataWeather
         v-for="(data, index) in weatherData"
-        :key="data.label"
+        :key="index"
         :label="data.label"
         :value="data.value + data.unit"
       />
@@ -42,7 +42,7 @@ const dayInfoData: DayInfoData[] = [
     <div class="weekWeather">
       <DayInfo
         v-for="(day, index) in dayInfoData"
-        :key="day.day"
+        :key="index"
         :image="day.image"
         :day="day.day"
         :value="day.value"
