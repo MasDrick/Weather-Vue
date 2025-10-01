@@ -37,7 +37,7 @@ const secondRowCards = computed(() => extraCards.value.slice(3, 5))
   <div class="mainInfo">
     <div class="topRight">
       <Thermometer class="chip-icon" />
-      <span class="chip-text">Ощущается {{ Math.round(feelsLike) }}°</span>
+      <span class="chip-text">Ощущается {{ Math.round(feelsLike!) }}°</span>
     </div>
     <div class="date">
       <h1>{{ dayOfWeek }}</h1>
