@@ -1,11 +1,25 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import DataWeather from './DataWeather.vue'
 import DayInfo from './DayInfo.vue'
 import Button from '../ui/Button.vue'
+import { ref } from 'vue'
+
+const emit = defineEmits<{
+  openModal: []
+}>()
+
+interface Props {
+  humidity?: number
+  windSpeed?: number
+  pressure?: number
+}
+
+const props = defineProps<Props>()
 
 interface WeatherData {
   label: string
-  value: number
+  value: string
   unit: string
 }
 
@@ -15,18 +29,29 @@ interface DayInfoData {
   value: number
 }
 
-const weatherData: WeatherData[] = [
-  { label: 'PRECIPITATION', value: 0, unit: '%' },
-  { label: 'HUMIDITY', value: 42, unit: '%' },
-  { label: 'WIND', value: 3, unit: ' km/h' },
-]
+// Используем computed для реактивности
+const weatherData = computed((): WeatherData[] => [
+  { label: 'Влажность', value: props.humidity ? `${props.humidity}` : '--', unit: '%' },
+  {
+    label: 'Скорость ветра',
+    value: props.windSpeed ? `${Math.round(props.windSpeed)}` : '--',
+    unit: ' km/h',
+  },
+  { label: 'Давление', value: props.pressure ? `${props.pressure}` : '--', unit: ' hPa' },
+])
 
 const dayInfoData: DayInfoData[] = [
-  { image: 'icon-4.svg', day: 'Tue', value: 30 },
-  { image: 'icon-2.svg', day: 'Wed', value: 22 },
-  { image: 'icon-3.svg', day: 'Thu', value: 6 },
-  { image: 'icon-4.svg', day: 'Fry', value: 26 },
+  { image: 'icon-4.svg', day: 'Вт', value: 30 },
+  { image: 'icon-2.svg', day: 'Ср', value: 22 },
+  { image: 'icon-3.svg', day: 'Чт', value: -6 },
+  { image: 'icon-4.svg', day: 'Пт', value: 26 },
 ]
+
+const activeCardIndex = ref(0)
+
+const setActiveCard = (index: number) => {
+  activeCardIndex.value = index
+}
 </script>
 
 <template>
@@ -46,9 +71,11 @@ const dayInfoData: DayInfoData[] = [
         :image="day.image"
         :day="day.day"
         :value="day.value"
+        :is-active="activeCardIndex === index"
+        @click="setActiveCard(index)"
       />
     </div>
-    <Button />
+    <Button @open-modal="emit('openModal')" />
   </div>
 </template>
 
@@ -58,10 +85,17 @@ const dayInfoData: DayInfoData[] = [
   flex-direction: column;
   justify-content: space-between;
   width: 50%;
-  height: 623px;
-  background-color: #222831;
+  height: 600px;
   padding: 55px;
   border-radius: 0 25px 25px 0;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 
   .dataWeather {
     display: flex;
