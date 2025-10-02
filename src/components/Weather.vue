@@ -48,7 +48,7 @@ const secondRowCards = computed(() => extraCards.value.slice(3, 5))
       </div>
     </div>
     <div class="weather">
-      <img src="/weather-icons/sunny.svg" alt="Sunny" />
+      <img :src="icon" alt="Sunny" />
       <p>
         <span> {{ temperature }} °C</span> <br />
         {{ condition }}

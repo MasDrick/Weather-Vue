@@ -109,7 +109,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/bg/bg1.jpg');
+  background-image: url('/bg/bg6.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
