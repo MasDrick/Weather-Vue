@@ -41,10 +41,10 @@ const weatherData = computed((): WeatherData[] => [
 ])
 
 const dayInfoData: DayInfoData[] = [
-  { image: 'icon-4.svg', day: 'Вт', value: 30 },
-  { image: 'icon-2.svg', day: 'Ср', value: 22 },
-  { image: 'icon-3.svg', day: 'Чт', value: -6 },
-  { image: 'icon-4.svg', day: 'Пт', value: 26 },
+  { image: '/weather-icons/fullMoon.svg', day: 'Вт', value: 30 },
+  { image: '/weather-icons/cloudy.svg', day: 'Ср', value: 22 },
+  { image: '/weather-icons/rain.svg', day: 'Чт', value: -6 },
+  { image: '/weather-icons/sunny.svg', day: 'Пт', value: 26 },
 ]
 
 const activeCardIndex = ref(0)

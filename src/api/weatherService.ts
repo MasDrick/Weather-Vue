@@ -1,5 +1,6 @@
 import type { WeatherData, WeatherApiResponse } from '../types/api'
 import { getDayOfWeek, getMonthName } from '../utils/dateUtils'
+import { getWeatherIcon } from '../utils/weatherIcons'
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY
 
@@ -10,13 +11,13 @@ if (!API_KEY) {
 function transformWeatherData(data: WeatherApiResponse): WeatherData {
   // Проверяем наличие необходимых данных
   const weatherCondition = data.weather?.[0]?.description || 'Неизвестно'
-  const weatherIcon = data.weather?.[0]?.icon || '01d'
+  const weatherIconCode = data.weather?.[0]?.icon || '01d'
   const country = data.sys?.country || ''
 
   return {
     temperature: Math.round(data.main.temp),
     condition: weatherCondition,
-    icon: `https://openweathermap.org/img/wn/${weatherIcon}@4x.png`,
+    icon: getWeatherIcon(weatherIconCode),
     city: data.name,
     country: country,
     dayOfWeek: getDayOfWeek(new Date()),
