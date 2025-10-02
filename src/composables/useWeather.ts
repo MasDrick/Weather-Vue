@@ -12,7 +12,8 @@ export function useWeather() {
     error.value = null
 
     try {
-      weatherData.value = await fetchWeatherByCoords(lat, lon)
+      const newData = await fetchWeatherByCoords(lat, lon)
+      weatherData.value = newData
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Произошла неизвестная ошибка'
       console.error('Error fetching weather:', err)
@@ -26,7 +27,8 @@ export function useWeather() {
     error.value = null
 
     try {
-      weatherData.value = await fetchWeatherByCity(city)
+      const newData = await fetchWeatherByCity(city)
+      weatherData.value = newData
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Произошла неизвестная ошибка'
       console.error('Error fetching weather:', err)

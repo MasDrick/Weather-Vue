@@ -7,8 +7,8 @@ import Info from './components/Info.vue'
 import Modal from './components/Modal.vue'
 
 // Композаблы
-const { weatherData, loading, error, loadWeatherByCoords, loadWeatherByCity } = useWeather()
-const { getCurrentPosition, geolocationError } = useGeolocation()
+const { weatherData, loadWeatherByCoords, loadWeatherByCity } = useWeather()
+const { getCurrentPosition } = useGeolocation()
 
 // Состояние модального окна
 const showModal = ref(false)
@@ -53,7 +53,7 @@ onMounted(async () => {
 <template>
   <div class="container">
     <Weather
-      v-if="weatherData && !loading"
+      v-if="weatherData"
       :temperature="weatherData.temperature"
       :condition="weatherData.condition"
       :icon="weatherData.icon"
@@ -73,7 +73,7 @@ onMounted(async () => {
       :timezone="weatherData.timezone"
     />
     <Info
-      v-if="weatherData && !loading"
+      v-if="weatherData"
       :humidity="weatherData.humidity"
       :wind-speed="weatherData.windSpeed"
       :pressure="weatherData.pressure"
@@ -89,14 +89,6 @@ onMounted(async () => {
         @use-geolocation="useCurrentLocation"
       />
     </Transition>
-
-    <!-- Состояние загрузки -->
-    <div v-if="loading" class="loading">Загрузка данных о погоде...</div>
-
-    <!-- Сообщение об ошибке -->
-    <div v-if="error || geolocationError" class="error">
-      {{ error || geolocationError }}
-    </div>
   </div>
 </template>
 
